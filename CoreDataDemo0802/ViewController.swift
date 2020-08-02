@@ -60,8 +60,36 @@ class ViewController: UIViewController {
         }
     }
     
+    //TODO: - 3 Retrieving Data from the Persistent Store using Core Data
     @IBAction func findBtnPressed(_ sender: UIButton) {
-        
+        if let context = managedObjectContext {
+            let entityDescription = NSEntityDescription.entity(forEntityName: "Contacts", in: context)
+            let request: NSFetchRequest<Contacts> = Contacts.fetchRequest()
+            request.entity = entityDescription  //set entity description
+            
+            if let name = name.text {
+                let pred = NSPredicate(format: "name = %@", name)
+                request.predicate = pred    //set predicate
+            }
+            
+            do {
+                let results = try context.fetch(request as! NSFetchRequest<NSFetchRequestResult>)
+                
+                if results.count > 0 {
+                    let match = results[0] as! NSManagedObject
+                    
+                    name.text = match.value(forKey: "name") as? String
+                    address.text = match.value(forKey: "address") as? String
+                    phone.text = match.value(forKey: "phone") as? String
+                    statusLbl.text = "Found \(results.count) pieces."
+                } else {
+                    statusLbl.text = "No Match"
+                }
+                
+            } catch let error {
+                statusLbl.text = error.localizedDescription
+            }
+        }
     }
 }
 
