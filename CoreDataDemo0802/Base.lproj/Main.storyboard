@@ -115,6 +115,7 @@
                         <outlet property="address" destination="QCj-Hm-LPS" id="Rga-Ks-ypQ"/>
                         <outlet property="name" destination="yps-6T-Bk0" id="bmg-4N-aIw"/>
                         <outlet property="phone" destination="ce5-L5-ZJp" id="qAZ-AE-MaJ"/>
+                        <outlet property="statusLbl" destination="srg-m7-Qo9" id="xsf-NS-HzC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
